@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :sales_status
   belongs_to :shipping_fee_status
+  belongs_to :prefecture
 
   validates :name, presence: true
   validates :info, presence: true
@@ -12,4 +13,5 @@ class Item < ApplicationRecord
   validates :category_id, numericality: { other_than: 1, message: "Can't be blank" }
   validates :sales_status_id, numericality: { other_than: 1, message: "Can't be blank"}
   validates :shipping_fee_status_id, numericality: { other_than: 1, message: "Can't be blank"}
+  validates :prefecture_id, numericality: { other_than: 1,message: "Can't be blank"}
 end
