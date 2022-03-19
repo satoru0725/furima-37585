@@ -18,12 +18,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it '商品名が空では投稿できない' do
-        @item.name = ""
+        @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
       it '商品の説明が空では投稿できない' do
-        @item.info = ""
+        @item.info = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Info can't be blank")
       end
@@ -53,34 +53,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Schedule delivery Can't be blank")
       end
       it '価格の情報が空だと投稿できない' do
-        @item.price = ""
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '価格の数値が¥300未満だと投稿できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
       it '価格の数値が¥9999999より大きいと投稿できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
       it '価格の情報が全角だと投稿できない' do
-        @item.price = "１００００"
+        @item.price = '１００００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格の情報が半角英字だと投稿できない' do
-        @item.price = "abcdef"
+        @item.price = 'abcdef'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'ユーザーが紐付いていなければ投稿できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
