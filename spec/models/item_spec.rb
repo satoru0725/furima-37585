@@ -60,12 +60,12 @@ RSpec.describe Item, type: :model do
       it '価格の数値が¥300未満だと投稿できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not included in the list')
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '価格の数値が¥9999999より大きいと投稿できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not included in the list')
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '価格の情報が全角だと投稿できない' do
         @item.price = '１００００'
