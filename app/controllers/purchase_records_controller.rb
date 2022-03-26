@@ -8,6 +8,7 @@ class PurchaseRecordsController < ApplicationController
   def create
     @purchase_address = PurchaseAddress.new(purchase_params)
     if @purchase_address.valid?
+       pay_item
        @purchase_address.save
        redirect_to root_path
     else
@@ -21,7 +22,14 @@ class PurchaseRecordsController < ApplicationController
     @item = Item.find(params[:item_id])
   end
   def purchase_params
-    #:number,:exp_month,:exp_year,:cvcのカード情報は保存確認のためpermitを通すために一時的に記述。後に削除すること。
-    params.require(:purchase_address).permit( :number, :exp_month, :exp_year, :cvc, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:purchase_address).permit( :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  end
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: purchase_params[:token],
+      currency: 'jpy'
+    )
   end
 end

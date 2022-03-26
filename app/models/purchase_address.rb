@@ -1,6 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :number, :exp_month, :exp_year, :cvc
+  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :token
   
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class PurchaseAddress
     validates :city
     validates :addresses
     validates :phone_number, numericality: { only_integer: true }, length: { in:10..11}
+    validates :token
   end
 
   def save
