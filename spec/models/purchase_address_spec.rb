@@ -27,14 +27,12 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'postal_codeが半角のハイフンを含んでいないと保存できないこと' do
         @purchase_address.postal_code = '1234567'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid.
-                                                                     Include hyphen(-) or Eenter a number in half-width')
+        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-) or Eenter a number in half-width')
       end
       it 'postal_codeが全角を含んでいると保存できないこと' do
         @purchase_address.postal_code = '１２３-４５６７'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid.
-                                                                     Include hyphen(-) or Eenter a number in half-width')
+        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-) or Eenter a number in half-width')
       end
       it 'prefectureを選択していないと保存できないこと' do
         @purchase_address.prefecture_id = 1
