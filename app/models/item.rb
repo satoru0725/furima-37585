@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_status
   belongs_to :prefecture
   belongs_to :schedule_delivery
+  has_one :purchase_record
 
   validates :name, presence: true
   validates :info, presence: true
