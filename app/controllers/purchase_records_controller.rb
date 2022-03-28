@@ -3,8 +3,7 @@ class PurchaseRecordsController < ApplicationController
 
   def index
     authenticate_user!
-    redirect_to root_path if @item.purchase_record.present?
-    redirect_to root_path if current_user.id == @item.user_id
+    redirect_to root_path if @item.purchase_record.present? || current_user.id == @item.user_id
     @purchase_address = PurchaseAddress.new
   end
 
