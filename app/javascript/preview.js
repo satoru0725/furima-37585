@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
   const fileField = document.querySelector('input[type="file"][name="item[images][]"]');
   fileField.addEventListener('change', function(e){
+
+    const dataIndex = e.target.getAttribute('data-index');
+    console.log(dataIndex);
+
     const alreadyPreview = document.querySelector('.preview');
     if (alreadyPreview) {
       alreadyPreview.remove();
@@ -15,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function(){
     console.log(blob);
     const previewWrapper = document.createElement('div');
     previewWrapper.setAttribute('class', 'preview');
+    previewWrapper.setAttribute('data-index', dataIndex);
+
     const previewImage = document.createElement('img');
     previewImage.setAttribute('class', 'preview-image');
     //previewImage.setAttribute('width', '400');
@@ -27,6 +33,10 @@ document.addEventListener('DOMContentLoaded', function(){
     const newFileField = document.createElement('input');
     newFileField.setAttribute('type', 'file');
     newFileField.setAttribute('name', 'post[images][]');
+
+    const lastFileField = document.querySelector('input[type="file"][name="item[images][]"]:last-child');
+    const nextDataIndex = Number(lastFileField.getAttribute('data-index')) +1;
+    newFileField.setAttribute('data-index', nextDataIndex);
 
     const fileFieldsArea = document.querySelector('.click-upload');
     fileFieldsArea.appendChild(newFileField);
