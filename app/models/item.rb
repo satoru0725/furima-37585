@@ -18,5 +18,6 @@ class Item < ApplicationRecord
   validates :shipping_fee_status_id, numericality: { other_than: 1, message: "Can't be blank" }
   validates :prefecture_id, numericality: { other_than: 1, message: "Can't be blank" }
   validates :schedule_delivery_id, numericality: { other_than: 1, message: "Can't be blank" }
-  validates :images, presence: true
+  validates :images, presence: true,
+                     length: { minimun: 1, maximun: 3, message: "は1枚以上、３枚以下にしてください"}
 end

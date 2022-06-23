@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function(){
   const previewList = document.getElementById('previews');
   if (!postForm) return null;
 
+  //投稿できる枚数の制限を定義
+  const imageLimits = 3;
+
   //プレビュー画像を生成・表示する関数
   const buildPreviewImage = (dataIndex, blob) =>{
     //画像を表示するためのdiv要素を生成
@@ -56,6 +59,10 @@ document.addEventListener('DOMContentLoaded', function(){
     deletePreviewImage.remove();
     const deleteFileField = document.querySelector(`input[type="file"][data-index="${dataIndex}"]`);
     deleteFileField.remove();
+
+    //画像の枚数が最大の時に削除ボタンを押した場合、file_fieldを1つ追加する
+    const imageCount = document.querySelectorAll(".preview").length;
+    if (imageCount == imageLimits - 1 ) buildNewFileField();
   };
 
   //input要素で値の変化が起きた際に呼び出される関数の中身
@@ -63,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function(){
     //data-index(何番目を操作しているか)を取得
     const dataIndex = e.target.getAttribute('data-index');
 
+    //以下は削除予定
     //古いプレビューが存在する場合は削除
     /*const alreadyPreview = document.querySelector('.preview');
     if (alreadyPreview) {
@@ -90,7 +98,12 @@ document.addEventListener('DOMContentLoaded', function(){
     };
 
     buildPreviewImage(dataIndex, blob);
-    buildNewFileField();
+    //以下は削除予定
+    //buildNewFileField();
+
+    //画像の枚数制限に引っかからなければ、新しいfile_fieldを追加する
+    const imageCount = document.querySelectorAll(".preview").length;
+    if (imageCount < imageLimits) buildNewFileField();
   };
 
   //input要素を取得
@@ -99,6 +112,8 @@ document.addEventListener('DOMContentLoaded', function(){
   //input要素で値の変化が起きた際に呼び出される関数
   fileField.addEventListener('change', changeFileField);
 });
+
+//以下は削除予定
 /*
   const fileField = document.querySelector('input[type="file"][name="item[images][]"]');
   fileField.addEventListener('change', function(e){
