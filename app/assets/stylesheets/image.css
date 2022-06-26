@@ -24,3 +24,12 @@ img {
   height: 200px;
   width: 200px;
 }
+
+.preview-image {
+  margin: 0px 20px;
+}
+
+.image-delete-button {
+  width: 100px;
+  margin: auto;
+}
