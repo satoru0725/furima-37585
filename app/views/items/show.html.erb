@@ -11,7 +11,7 @@
       <div class="other-images">
         <% @item.images[1..-1].each do |image| %>
           <div class="other-image">
-            <%= image_tag image %>
+            <%= image_tag image, class:"other-box-img" %>
           </div>
         <% end %>
       </div>
@@ -19,7 +19,6 @@
         <div class="sold-out">
           <span>Sold Out!!</span>
         </div>
-     
       <% end %>
     </div>
     <div class="item-price-box">
