@@ -33,7 +33,12 @@
   object-fit: contain;
 }
 
-.other-box-img {
+.other-images {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-box-other-img {
   height: 50vh;
   width: 60vw;
   min-height: 500px;
